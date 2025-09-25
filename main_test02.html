@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>팀원 모집 | Dream Team</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg,#8e2de2,#4a00e0);
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+    /* 네비게이션 */
+    .navbar {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      transition: background 0.4s;
+    }
+    .navbar.scrolled {background: rgba(0,0,0,0.8);}
+    /* 히어로 */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1.2s ease;
+    }
+    @keyframes fadeInUp {
+      from {opacity:0; transform:translateY(40px)}
+      to {opacity:1; transform:translateY(0)}
+    }
+    h1.display-3 {text-shadow:0 4px 10px rgba(0,0,0,0.7);}
+    /* 카드 */
+    .recruit-card {
+      background: rgba(255,255,255,0.08);
+      border: none;
+      border-radius: 1rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .recruit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    /* 폼 */
+    #apply form .form-control {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+    }
+    #apply form .form-control:focus {
+      box-shadow: 0 0 0 2px #b388ff;
+    }
+    footer {
+      background: rgba(0,0,0,0.5);
+      padding: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-white" href="#">Dream Team</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="#about">소개</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#positions">모집 분야</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#apply">지원하기</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1 class="display-3 fw-bold mb-4">함께할 팀원을 찾습니다</h1>
+      <p class="lead mb-4">열정과 책임감, 그리고 즐길 줄 아는 당신을 기다립니다.</p>
+      <a href="#apply" class="btn btn-lg btn-light rounded-pill px-4 py-2">지금 지원하기</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-5 container text-center">
+    <h2 class="fw-bold mb-4">우리 팀 소개</h2>
+    <p class="lead">Dream Team은 창의적인 아이디어와 기술력으로 새로운 가치를 만드는 것을 목표로 합니다. 다양한 프로젝트에서 협력하며 성장하고 있습니다.</p>
+  </section>
+
+  <!-- Positions -->
+  <section id="positions" class="py-5 bg-dark bg-opacity-25">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5">모집 분야</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card recruit-card p-4 text-center h-100">
+            <i class="bi bi-code-slash display-3 mb-3 text-warning"></i>
+            <h4>프론트엔드 개발자</h4>
+            <p>React, Vue 등 최신 웹 기술을 활용한 UI/UX 개발</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card recruit-card p-4 text-center h-100">
+            <i class="bi bi-server display-3 mb-3 text-success"></i>
+            <h4>백엔드 개발자</h4>
+            <p>Node.js, Python 기반 서버 및 API 개발</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card recruit-card p-4 text-center h-100">
+            <i class="bi bi-brush display-3 mb-3 text-info"></i>
+            <h4>디자이너</h4>
+            <p>브랜딩, UI/UX 디자인 및 그래픽 작업</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apply -->
+  <section id="apply" class="py-5 container">
+    <h2 class="fw-bold text-center mb-5">지원하기</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form id="applyForm">
+          <div class="mb-3">
+            <label class="form-label">이름</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">이메일</label>
+            <input type="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">지원 분야</label>
+            <select class="form-select" required>
+              <option selected disabled>선택해주세요</option>
+              <option>프론트엔드 개발자</option>
+              <option>백엔드 개발자</option>
+              <option>디자이너</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">자기소개</label>
+            <textarea class="form-control" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 py-2">제출</button>
+        </form>
+        <div id="toast" class="toast align-items-center text-bg-success border-0 mt-3" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">지원이 성공적으로 제출되었습니다!</div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    <p class="mb-0">&copy; 2025 Dream Team. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar 색상 변화
+    window.addEventListener('scroll',()=>{
+      const nav=document.querySelector('.navbar');
+      nav.classList.toggle('scrolled',window.scrollY>50);
+    });
+    // Toast 알림
+    const form=document.getElementById('applyForm');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      const toastEl=new bootstrap.Toast(document.getElementById('toast'));
+      toastEl.show();
+      form.reset();
+    });
+  </script>
+</body>
+</html>

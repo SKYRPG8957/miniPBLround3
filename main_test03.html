@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO -->
+  <title>miniPBL Round3 — 가상 팀원모집</title>
+  <meta name="description" content="HTML Form → Google Sheets 연동(Apps Script). 접근성·SEO·반응형을 고려한 팀원모집 랜딩페이지 템플릿입니다.">
+  <meta name="keywords" content="팀원모집, team recruit, HTML form, Google Sheets, accessibility, responsive">
+  <meta name="author" content="Your Team Name">
+
+  <!-- Fonts -->
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#0A3D91; /* project primary */
+      --neutral-100:#F7F7F8;
+      --team-concept:#000000;
+      --accentA: #6f42c1;
+      --container-max:1140px;
+      --focus: 3px solid #ffd54d;
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: Pretendard, 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:var(--neutral-100); color:var(--team-concept);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Container limit */
+    .container-lg{max-width:var(--container-max)}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;background:#000;color:#fff;padding:8px 12px;border-radius:6px;z-index:1000}
+
+    /* Header */
+    header.site-hero{padding:4rem 1rem;background:linear-gradient(180deg,#e9f0ff 0,#fff 100%);border-bottom:1px solid #e6eefc}
+    header .lead{color:rgba(0,0,0,0.7)}
+
+    /* Grid: works / collaboration */
+    .grid-3{
+      display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;
+    }
+    .col-4{grid-column:span 4}
+    .col-6{grid-column:span 6}
+    .col-12{grid-column:span 12}
+
+    @media (max-width:1199px){ /* tablet */
+      .col-4{grid-column:span 6}
+      .col-6{grid-column:span 12}
+    }
+    @media (max-width:767px){
+      .grid-3{gap:0.75rem}
+      .col-4{grid-column:span 12}
+    }
+
+    /* Card */
+    .card-plain{background:#fff;border-radius:12px;padding:1.25rem;border:1px solid #e9eef6}
+
+    /* Form accessibility */
+    label.required::after{content:" *";color:#c71d1d}
+    input:focus, textarea:focus, select:focus{outline:none;box-shadow:0 0 0 4px rgba(10,61,145,0.12);border-color:var(--primary)}
+
+    /* Dark mode */
+    body.dark{background:#0b1220;color:#e6eef8}
+    body.dark header.site-hero{background:linear-gradient(180deg,#07102a 0,#071022 100%);border-bottom:1px solid rgba(255,255,255,0.04)}
+    body.dark .card-plain{background:#0f1724;border:1px solid rgba(255,255,255,0.06)}
+    body.dark input, body.dark textarea, body.dark select{background:#0b1220;color:#e6eef8;border:1px solid rgba(255,255,255,0.06)}
+
+    /* Back to top */
+    #backToTop{position:fixed;right:1rem;bottom:1rem;width:48px;height:48px;border-radius:50%;display:none;align-items:center;justify-content:center;z-index:999;background:var(--primary);color:#fff;border:none;box-shadow:0 6px 18px rgba(10,61,145,0.24)}
+
+    /* Responsive helpers */
+    .visually-hidden-focusable:focus{position:static;width:auto;height:auto;margin:0;padding:0;clip:auto;overflow:visible}
+
+    /* small helpers */
+    .muted{color:rgba(0,0,0,0.6)}
+    body.dark .muted{color:rgba(230,238,248,0.6)}
+
+  </style>
+</head>
+<body>
+
+  <!-- Skip link for keyboard users -->
+  <a href="#main" class="skip-link">본문으로 건너뛰기</a>
+
+  <!-- Theme toggle (accessibility: aria-pressed) -->
+  <div style="position:fixed;right:1rem;top:1rem;z-index:1200">
+    <button id="themeToggle" class="btn btn-sm btn-outline-primary" aria-pressed="false" aria-label="다크 모드 토글">
+      <i class="bi bi-moon-stars me-1"></i>테마
+    </button>
+  </div>
+
+  <!-- Header / Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-lg">
+      <a class="navbar-brand fw-bold" href="#">miniPBL Round3</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="메뉴">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#works">Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#collab">Collaboration</a></li>
+          <li class="nav-item"><a class="nav-link" href="#apply">Apply</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quality">Quality</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="site-hero text-center" role="banner">
+    <div class="container-lg py-5">
+      <h1 class="display-6 fw-bold">가상팀원 모집 — miniPBL Round3</h1>
+      <p class="lead muted">HTML Form → Google Sheets 연동 · 접근성 · SEO · 반응형 실습용 템플릿</p>
+      <p class="muted small">QR코드를 게시해 복도 포스터로도 사용하세요.</p>
+    </div>
+  </header>
+
+  <main id="main" class="container-lg my-5" role="main">
+
+    <!-- About -->
+    <section id="about" class="mb-5" aria-labelledby="about-label">
+      <h2 id="about-label" class="h4 fw-bold">Project Overview</h2>
+      <p class="muted">목적: HTML Form + Google Sheets DB 연동, 접근성, SEO, 반응형 실습</p>
+    </section>
+
+    <!-- Works (grid 3 / 2 / 1 cols) -->
+    <section id="works" class="mb-5" aria-labelledby="works-label">
+      <h2 id="works-label" class="h5 fw-bold mb-3">Works</h2>
+      <div class="grid-3">
+        <article class="col-4 card-plain" tabindex="0">
+          <h3 class="h6 fw-bold">Landing</h3>
+          <p class="muted">팀 소개·성과물 · SEO 메타 포함</p>
+        </article>
+        <article class="col-4 card-plain" tabindex="0">
+          <h3 class="h6 fw-bold">Poster</h3>
+          <p class="muted">QR 코드 포함 A3 포스터용 디자인</p>
+        </article>
+        <article class="col-4 card-plain" tabindex="0">
+          <h3 class="h6 fw-bold">Apply Form</h3>
+          <p class="muted">HTML form → Apps Script → Google Sheets 저장</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Collaboration -->
+    <section id="collab" class="mb-5" aria-labelledby="collab-label">
+      <h2 id="collab-label" class="h5 fw-bold mb-3">Collaboration</h2>
+      <div class="grid-3">
+        <div class="col-6 card-plain">
+          <h3 class="h6 fw-bold">Tools</h3>
+          <ul>
+            <li>Notion · Figma · GitHub</li>
+            <li>Google Sheets (DB), Apps Script (web app endpoint)</li>
+          </ul>
+        </div>
+        <div class="col-6 card-plain">
+          <h3 class="h6 fw-bold">Design keywords</h3>
+          <p class="muted">Primary: #0A3D91 · Accent: Gradient · Neutral: #111 / #F7F7F8</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply Form (core) -->
+    <section id="apply" class="mb-5" aria-labelledby="apply-label">
+      <h2 id="apply-label" class="h5 fw-bold mb-3">지원하기 (HTML Form)</h2>
+
+      <form id="recruitForm" class="needs-validation" novalidate aria-describedby="form-help">
+
+        <div class="grid-3 mb-3">
+          <div class="col-4">
+            <label for="name" class="form-label required">이름</label>
+            <input id="name" name="name" type="text" class="form-control" autocomplete="name" required aria-required="true" aria-describedby="nameHelp">
+            <div id="nameHelp" class="form-text muted">실명(공식 명칭)</div>
+            <div class="invalid-feedback">이름을 입력해주세요.</div>
+          </div>
+
+          <div class="col-4">
+            <label for="studentId" class="form-label required">학번</label>
+            <input id="studentId" name="studentId" type="text" class="form-control" inputmode="numeric" required aria-required="true">
+            <div class="invalid-feedback">학번을 입력해주세요.</div>
+          </div>
+
+          <div class="col-4">
+            <label for="team" class="form-label required">팀</label>
+            <select id="team" name="team" class="form-select" required aria-required="true">
+              <option value="" disabled selected>선택하세요</option>
+              <option value="A">Team A</option>
+              <option value="B">Team B</option>
+              <option value="C">Team C</option>
+            </select>
+            <div class="invalid-feedback">팀을 선택해주세요.</div>
+          </div>
+        </div>
+
+        <div class="grid-3 mb-3">
+          <div class="col-12">
+            <label for="role" class="form-label required">지원 역할</label>
+            <input id="role" name="role" type="text" class="form-control" required aria-required="true" placeholder="예: 프론트엔드 / 디자이너">
+            <div class="invalid-feedback">지원 역할을 입력해주세요.</div>
+          </div>
+        </div>
+
+        <div class="grid-3 mb-3">
+          <div class="col-12">
+            <label for="motivation" class="form-label required">간단한 지원 동기 / 한 줄 어필</label>
+            <textarea id="motivation" name="motivation" rows="4" class="form-control" required aria-required="true"></textarea>
+            <div class="invalid-feedback">간단한 지원 동기를 입력해주세요.</div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary" id="submitBtn">제출</button>
+          <button type="button" id="resetBtn" class="btn btn-outline-secondary">초기화</button>
+          <div id="form-feedback" role="status" aria-live="polite" class="muted align-self-center"></div>
+        </div>
+
+        <div id="form-help" class="form-text muted mt-2">제출하면 Google Sheets에 기록됩니다. 개인정보는 수업 목적으로만 사용됩니다.</div>
+      </form>
+
+    </section>
+
+    <!-- Quality / Accessibility hints -->
+    <section id="quality" class="mb-5" aria-labelledby="quality-label">
+      <h2 id="quality-label" class="h5 fw-bold mb-3">Quality & Accessibility</h2>
+      <ul>
+        <li>Labels 연결, aria-required, contrast ratio ≥ 4.5:1 확인</li>
+        <li>키보드만으로 폼 작동 가능 · Skip link 포함</li>
+        <li>SEO 메타 태그 포함 (title/description/author)</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="py-4 border-top text-center">
+    <div class="container-lg">
+      <small class="muted">miniPBL Round3 · team: Your Team Name · contact: team@example.com</small>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-hidden="true" title="위로가기">▲</button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // -------- Theme toggle (light/dark) --------
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark');
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+      themeToggle.querySelector('i').className = isDark ? 'bi bi-sun me-1' : 'bi bi-moon-stars me-1';
+      localStorage.setItem('prefTheme', isDark ? 'dark' : 'light');
+    });
+    // restore
+    if(localStorage.getItem('prefTheme')==='dark'){
+      document.body.classList.add('dark');
+      themeToggle.setAttribute('aria-pressed','true');
+      themeToggle.querySelector('i').className='bi bi-sun me-1';
+    }
+
+    // -------- Back to top --------
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTopBtn.style.display = (window.scrollY > 200) ? 'flex' : 'none';
+    });
+    backToTopBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    // -------- Form handling & Google Apps Script POST --------
+    const form = document.getElementById('recruitForm');
+    const feedback = document.getElementById('form-feedback');
+    const submitBtn = document.getElementById('submitBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // Replace with your deployed Apps Script web app URL
+    const GAS_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_SCRIPT_ID/exec';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // native validation
+      if(!form.checkValidity()){
+        form.classList.add('was-validated');
+        feedback.textContent = '필수 항목을 확인해주세요.';
+        return;
+      }
+
+      submitBtn.disabled = true; feedback.textContent = '전송중...';
+
+      // gather form data
+      const data = new FormData(form);
+      const payload = {};
+      data.forEach((v,k)=> payload[k] = v);
+
+      try{
+        const resp = await fetch(GAS_URL, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        const text = await resp.text();
+        feedback.textContent = '제출 성공! Google Sheets에 기록되었습니다.';
+        form.reset(); form.classList.remove('was-validated');
+      }catch(err){
+        console.error(err);
+        feedback.textContent = '제출 실패: 네트워크/서버를 확인하세요.';
+      }finally{ submitBtn.disabled = false; }
+    });
+
+    resetBtn.addEventListener('click', ()=>{ if(confirm('폼을 초기화하시겠습니까?')) form.reset();});
+
+    // Accessibility: focus visible polyfill for keyboard users
+    (function(){
+      let hadKeyboardEvent = false;
+      const handleFirstTab = (e) => {
+        if (e.key === 'Tab') { document.body.classList.add('user-is-tabbing'); window.removeEventListener('keydown', handleFirstTab); hadKeyboardEvent = true; }
+      };
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+
+  </script>
+
+  <!--
+    -------------------- Apps Script (server side) --------------------
+    Create a new Google Apps Script project, paste the code below, save and Deploy -> New deployment -> Web app
+    Set "Who has access" to "Anyone" (or anyone within your domain) and copy the Web app URL to GAS_URL above.
+
+    // apps_script_code.gs
+    function doPost(e) {
+      try {
+        var ss = SpreadsheetApp.openById('REPLACE_SPREADSHEET_ID'); // Sheet ID (from URL)
+        var sheet = ss.getSheetByName('Responses') || ss.insertSheet('Responses');
+        var body = JSON.parse(e.postData.contents);
+        var row = [ new Date(), body.name||'', body.studentId||'', body.team||'', body.role||'', body.motivation||'' ];
+        sheet.appendRow(row);
+        return ContentService.createTextOutput(JSON.stringify({result: 'success'})).setMimeType(ContentService.MimeType.JSON);
+      } catch(err) {
+        return ContentService.createTextOutput(JSON.stringify({result: 'error', error: err.message})).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+
+    -------------------- Google Sheets COUNTIF example --------------------
+    Add in your sheet (e.g. in a tab "Stats"):
+    =COUNTIF(Responses!D:D, "A")  // counts team A submissions (if team is column D)
+
+    --------------------------------------------------------------------
+  -->
+
+</body>
+</html>
