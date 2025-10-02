@@ -5,205 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>팀원 모집 | 함께할 인재를 찾습니다</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    :root {
-      --accent: #8a4fff;
-      --bg-light: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-      --bg-dark: linear-gradient(135deg, #2c2c3e 0%, #3b3b4d 100%);
-    }
+  <link rel="stylesheet" href="ass.css">
 
-    body {
-      background: var(--bg-light);
-      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
-      color: #fff;
-      transition: background 0.3s, color 0.3s;
-    }
 
-    body.dark {
-      background: var(--bg-dark);
-      color: #eee;
-    }
-
-    .glass {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 1rem;
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      transition: background 0.3s, border 0.3s;
-    }
-
-    body.dark .glass {
-      background: rgba(30, 30, 30, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .navbar {
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px);
-    }
-
-    body.dark .navbar {
-      background: rgba(0, 0, 0, 0.6) !important;
-    }
-
-    .navbar-brand,
-    .nav-link {
-      color: #fff !important;
-      font-weight: 600;
-    }
-
-    body.dark .navbar-brand,
-    body.dark .nav-link {
-      color: #eee !important;
-    }
-
-    /* --- 수정된 부분 --- */
-    .hero {
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      flex-direction: column;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-      animation: fadeDown 1.2s ease;
-      color: inherit;
-      transition: color 0.3s;
-      letter-spacing: normal;
-    }
-
-    .hero p {
-      transition: color 0.3s;
-      color: inherit;
-    }
-
-    @keyframes fadeDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card-role {
-      border: 0;
-      border-radius: 1rem;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(6px);
-      color: #fff;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark .card-role {
-      background: rgba(50, 50, 50, 0.6);
-      color: #eee;
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      border: 0;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .btn-accent:hover {
-      background: #7a3fe0;
-      color: #fff;
-    }
-
-    label {
-      color: #fff;
-      transition: color 0.3s;
-    }
-
-    body.dark label {
-      color: #eee;
-    }
-
-    .form-control,
-    .form-select {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: background 0.3s, color 0.3s, border 0.3s;
-    }
-
-    body.dark .form-control,
-    body.dark .form-select {
-      background: rgba(50, 50, 50, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #eee;
-    }
-
-    footer {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 2rem 0;
-      transition: background 0.3s;
-    }
-
-    body.dark footer {
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    #backToTop {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
-      display: none;
-    }
-
-    .collab-link {
-      color: #fff;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    body.dark .collab-link {
-      color: #eee;
-    }
-
-    .collab-link i {
-      transition: transform 0.2s;
-      font-size: 1.5rem;
-    }
-
-    .collab-link:hover {
-      color: #8a4fff;
-      transform: translateY(-3px);
-    }
-
-    .collab-link:hover i {
-      transform: scale(1.2);
-    }
-  </style>
 </head>
 
 <body>
@@ -270,12 +77,9 @@
     <section id="collab" class="mb-5 glass p-4">
       <h2 class="fw-bold mb-3">Collaboration (협업툴)</h2>
       <ul class="list-unstyled d-flex flex-column flex-md-row flex-xl-row gap-3 gap-md-4 gap-xl-4">
-        <li><a class="collab-link" href="https://github.com/" target="_blank"><i class="bi bi-github"></i> GitHub</a>
-        </li>
-        <li><a class="collab-link" href="https://www.figma.com/" target="_blank"><i class="bi bi-brush"></i> Figma</a>
-        </li>
-        <li><a class="collab-link" href="https://www.notion.so/" target="_blank"><i class="bi bi-journal-text"></i>
-            Notion</a></li>
+        <li><a class="collab-link" href="https://github.com/" target="_blank"><i class="bi bi-github"></i> GitHub</a></li>
+        <li><a class="collab-link" href="https://www.figma.com/" target="_blank"><i class="bi bi-brush"></i> Figma</a></li>
+        <li><a class="collab-link" href="https://www.notion.so/" target="_blank"><i class="bi bi-journal-text"></i> Notion</a></li>
       </ul>
     </section>
 
@@ -314,28 +118,48 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const themeBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      if (document.body.classList.contains('dark')) {
-        themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill');
-      } else {
-        themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill');
+    // --- 테마 전환 (다크/라이트 모드) 기능 ---
+    const themeBtn = document.getElementById('themeToggle'); // 테마 버튼 요소 가져오기
+    const themeIcon = document.getElementById('themeIcon'); // 테마 아이콘 요소 가져오기
+    
+    themeBtn.addEventListener('click', () => { // 버튼 클릭 시 이벤트 처리
+      document.body.classList.toggle('dark'); // body에 'dark' 클래스를 추가/제거
+
+      if (document.body.classList.contains('dark')) { // 만약 'dark' 클래스가 있다면 (다크 모드라면)
+        themeIcon.classList.replace('bi-moon-fill', 'bi-sun-fill'); // 달 아이콘을 해 아이콘으로 변경
+      } else { // 'dark' 클래스가 없다면 (라이트 모드라면)
+        themeIcon.classList.replace('bi-sun-fill', 'bi-moon-fill'); // 해 아이콘을 달 아이콘으로 변경
       }
     });
 
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none'; });
+    // --- '맨 위로 가기' 버튼 기능 ---
+    const backToTop = document.getElementById('backToTop'); // 버튼 요소 가져오기
+    
+    // 스크롤 이벤트 감지
+    window.addEventListener('scroll', () => { 
+      // 사용자가 200px 이상 스크롤하면 버튼을 표시하고, 그렇지 않으면 숨김
+      backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none'; 
+    });
+    
+    // 버튼 클릭 시 페이지 맨 위로 부드럽게 스크롤
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    const form = document.getElementById('applyForm');
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!form.checkValidity()) { form.classList.add('was-validated'); return; }
+    // --- 지원서 폼 유효성 검사 기능 ---
+    const form = document.getElementById('applyForm'); // 폼 요소 가져오기
+    
+    form.addEventListener('submit', e => { // 폼 제출 이벤트 처리
+      e.preventDefault(); // 폼의 기본 제출 동작(새로고침)을 막음
+      
+      // 폼의 모든 필드가 유효한지 확인
+      if (!form.checkValidity()) { 
+        form.classList.add('was-validated'); // 유효하지 않다면, Bootstrap 유효성 검사 피드백을 표시
+        return; // 함수 종료
+      }
+      
+      // 유효하다면 알림창 표시
       alert('지원서가 제출되었습니다!');
-      form.reset();
-      form.classList.remove('was-validated');
+      form.reset(); // 폼 필드 초기화
+      form.classList.remove('was-validated'); // 유효성 검사 피드백 클래스 제거
     });
   </script>
 </body>
